@@ -1,0 +1,48 @@
+<div class="row" *ngIf="showTable">
+  <div class="col-xs-12">
+    <h3>Available Stock</h3>
+  </div>
+</div>
+<div *ngIf="isLoading">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+
+<div class="row" *ngIf="!showTable">
+  <div class="col-xs-12">
+    <h3>No Item is on Sale</h3>
+  </div>
+</div>
+<div class="row" *ngIf="!isLoading&&showTable">
+  <div class="col-xs-6">
+    <table class="table table-bordered"style="cursor: pointer;">
+      <tr>
+        <th>S.No.</th>
+        <th>Category</th>
+        <th>Products</th>
+        <th>Price</th>
+
+      </tr>
+
+      <tr *ngFor="let item of categoriesWithProducts;let i =index">
+        <td>{{i+1}}.</td>
+        <td>{{item.name}}</td>
+
+        <td>
+          <tr *ngFor="let product of item.products">
+            {{product.name}}
+          </tr>
+        </td>
+        <td >
+          <tr *ngFor="let product of item.products">${{product.price}}</tr>
+        </td>
+      </tr>
+
+    </table>
+
+
+  </div>
+
+  <div class="col-xs-6">
+    <app-buy-item></app-buy-item>
+  </div>
+</div>

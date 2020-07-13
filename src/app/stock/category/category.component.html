@@ -1,0 +1,38 @@
+<div *ngIf="isLoading" style="text-align: center;">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+
+<div [class]="alertType" *ngIf="error">
+  {{error}}
+</div>
+
+<div class="row" *ngIf="!isLoading">
+  <div class="col-xs-12">
+    <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="name">Category Name</label>
+            <input type="text" id="name" class="form-control" formControlName="name">
+            <p *ngIf="!categoryForm.get('name').valid && categoryForm.get('name').touched">Category Name is required</p>
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="btn-group mr-2" role="group" aria-label="First group">
+              <button class="btn btn-success" [disabled]="!categoryForm.valid" type="submit">Save</button>
+            </div>
+            <div class="btn-group mr-2" role="group" aria-label="Second group">
+              <button class="btn btn-danger" (click)="onCancelBtnClick()" type="button">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

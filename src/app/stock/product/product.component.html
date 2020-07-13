@@ -1,0 +1,62 @@
+<div *ngIf="isLoading" style="text-align: center;">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+
+<div [class]="alertType" *ngIf="error">
+  {{error}}
+</div>
+
+<div class="row" *ngIf="!isLoading">
+  <div class="col-xs-12">
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="name">Category Name</label>
+            <select formControlName="category" class="form-control" value="null">
+              <option value="null">Choose Category</option>
+              <option [value]="i+1" *ngFor="let category of categories;let i=index">{{category.name}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="name">Product Name</label>
+            <input type="text" id="productName" class="form-control" formControlName="productName">
+            <p *ngIf="!productForm.get('productName').valid && productForm.get('productName').touched">Product Name
+              is required</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="name">Price</label>
+            <input type="number" id="price" placeholder="Enter in Dollars" class="form-control" formControlName="price">
+            <p *ngIf="!productForm.get('price').valid && productForm.get('price').touched">Price
+              is required</p>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="btn-group mr-2" role="group" aria-label="First group">
+              <button class="btn btn-success" [disabled]="!productForm.valid" type="submit">Submit</button>
+            </div>
+            <div class="btn-group mr-2" role="group" aria-label="Second group">
+              <button class="btn btn-danger" (click)="onCancelBtnClick()" type="button">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
